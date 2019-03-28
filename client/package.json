@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "register-service-worker": "^1.6.2",
+    "rxjs": "^6.4.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
+    "vue-rx": "^6.1.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
