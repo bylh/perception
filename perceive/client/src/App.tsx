@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
-
+import './App.scss';
+import { Tag } from 'antd';
 class App extends Component {
   render() {
     return (
@@ -11,6 +11,8 @@ class App extends Component {
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>
+          <Tag color="red">red</Tag>
+          <Tag color="#108ee9">#108ee9</Tag>
           <a
             className="App-link"
             href="https://reactjs.org"
