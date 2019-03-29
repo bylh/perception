@@ -1,24 +1,31 @@
 import React, { Component } from 'react'
 import './home.scss'
 import Game from '../chess/game'
+import axios from 'axios'
 interface HomeProps {
-  value: number
+  name: string
 }
 class Home extends Component<HomeProps> {
   constructor(props: HomeProps) {
     super(props)
     this.state = {
-      value: 0
+      name: '井字棋'
     }
   }
   test(): void {
     console.log(this.props)
+    axios.request({
+      method: 'get',
+      url: '/about'
+    }).then((data) => {
+      console.log(data);
+    });
   }
   render() {
     return (
       <div className="bylh-home">
         <p onClick={() => this.test()}>
-          perceive everything + {this.props.value}
+          {this.props.name}
         </p>
         <Game history={[]} xIsNext={true} />
       </div>
