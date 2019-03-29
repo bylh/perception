@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false, // 设为false null可以赋给任何类型
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",

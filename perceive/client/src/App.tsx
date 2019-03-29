@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.scss'
 import { Layout } from 'antd'
+import Home from './views/home/home'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -8,13 +9,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Layout className="bylh">
-          <Header className="header">Header</Header>
+        <Layout className="container">
+          <Header className="header">perceive</Header>
           <Layout className="content">
-            <Sider className="sider">Sider</Sider>
-            <Content className="main">Content</Content>
+            <Sider className="sider">导航</Sider>
+            <Content className="main">
+              <Home value={11}></Home>
+            </Content>
           </Layout>
-          <Footer className="footer">Footer</Footer>
+          <Footer className="footer">关于：测试阶段</Footer>
         </Layout>
       </div>
     )
