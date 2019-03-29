@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './chess.scss'
 // 类式组件
 // interface SquareProps {
 //   value: string,

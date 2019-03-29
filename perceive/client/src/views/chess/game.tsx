@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Board from './board'
+import './chess.scss'
 interface GameProps {
   history: Array<any>
   xIsNext: boolean

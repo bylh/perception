@@ -1,0 +1,11 @@
+.game {
+  background-color: aliceblue;
+  .board-row {
+    height: 80px;
+  }
+  .square{
+    height: 80px;
+    width: 80px;
+    vertical-align: top;// 默认为baseline, button中加不加文字影响baseline？
+  } 
+}

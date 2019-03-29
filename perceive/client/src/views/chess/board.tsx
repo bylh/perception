@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Square from './square'
+import './chess.scss'
 interface BoardProps {
   squares: Array<string>
   onClick: (i: string) => void
