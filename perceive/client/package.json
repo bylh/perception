@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "scp -P 26685 -r build root@95.169.7.111:/home/bylh/perceive"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,6 +31,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "proxy": "http://127.0.0.1:4000"
+  ]
 }

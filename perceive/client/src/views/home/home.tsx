@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './home.scss'
 import Game from '../chess/game'
-import axios from 'axios'
+import axios from '../../service/axios'
 interface HomeProps {
   name: string
 }
