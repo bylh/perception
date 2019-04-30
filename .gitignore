@@ -21,3 +21,5 @@ tests/unit/coverage
 *.sln
 *.sw*
 .history
+
+/build
