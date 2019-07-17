@@ -27,10 +27,10 @@ import cors from 'cors';
    
     // 启动监听
 
-    httpServer.listen(4200);
+    httpServer.listen(4000);
     if (process.send != null) process.send('ready');
 
-    console.log('监听http 4200端口');
+    console.log('监听http 4000端口');
 
     process.on('SIGINT', async () => {  // 保存log后退出
         process.exit(); // 程序结束
