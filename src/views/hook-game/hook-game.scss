@@ -2,8 +2,10 @@
   height: 100%;
   width: 100%;
   background: greenyellow;
-  .content {
-    overflow: hidden;
+  .container-header {
+    display: none;
+  }
+  .container-content {
     height: 100%;
     width: 100%;
     background: yellow;
