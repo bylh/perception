@@ -5,7 +5,10 @@ import React, { useState, useEffect } from 'react';
 
 export default function HookGame() {
   const [count, setCount] = useState(0);
-  const initData = async () => {
+
+  /* 执行初始化操作，需要注意的是，这里的useEffect的第二个参数必须传空数组，这样它就等价于只在componentDidMount的时候执行。
+  如果不传第二个参数的话，它就等价于componentDidMount和componentDidUpdate。*/
+  useEffect(() => {
     // 发起请求并执行初始化操作
     /* 1. Three.js 场景只有一种，THREE.Scene 场景是所有物体的容器；
        2. 相机决定了场景中哪个角度的景色会显示出来
@@ -14,11 +17,18 @@ export default function HookGame() {
 
     // createScene();
 
-    let scene = new THREE.Scene();
-    let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    let renderer = new THREE.WebGLRenderer();
-    renderer.setSize(800 || window.innerWidth, 500 || window.innerHeight);
+    let WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+    // TODO 此函数中获取高度不一致
     let content = document.getElementById('hook-game-content');
+    const { clientWidth, clientHeight } = content;
+    console.log(clientWidth, clientHeight, content);
+    WIDTH = clientWidth;
+    HEIGHT = clientHeight
+
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(75, HEIGHT / WIDTH, 0.1, 1000);
+    let renderer = new THREE.WebGLRenderer();
+    renderer.setSize(WIDTH, HEIGHT);
     content.appendChild(renderer.domElement);
     // document.body.appendChild();
     let geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -35,28 +45,30 @@ export default function HookGame() {
     animate();
     const handleWindowResize = () => {
       // 更新渲染器的高度和宽度以及相机的纵横比
-      let HEIGHT = window.innerHeight;
-      let WIDTH = window.innerWidth;
+      // HEIGHT = window.innerHeight;
+      // WIDTH = window.innerWidth;
+      let content = document.getElementById('hook-game-content');
+      const { clientWidth, clientHeight } = content;
+      WIDTH = clientWidth;
+      HEIGHT = clientHeight
+      console.log(WIDTH, HEIGHT);
       renderer.setSize(WIDTH, HEIGHT);
       camera.aspect = WIDTH / HEIGHT;
       camera.updateProjectionMatrix();
     };
-     // 监听屏幕，缩放屏幕更新相机和渲染器的尺寸
-     window.addEventListener('resize', handleWindowResize, false);
-  };
-  /* 执行初始化操作，需要注意的是，这里的useEffect的第二个参数必须传空数组，这样它就等价于只在componentDidMount的时候执行。
-  如果不传第二个参数的话，它就等价于componentDidMount和componentDidUpdate。*/
-  useEffect(() => {
-    initData();
+    // 监听屏幕，缩放屏幕更新相机和渲染器的尺寸
+    window.addEventListener('resize', handleWindowResize, false);
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <p>You clicked {count} times</p>
       <button onClick={() => setCount(count + 1)}>
         Click me
       </button>
-      <div id="hook-game-content" className="content"></div>
+      <div
+        id="hook-game-content"
+        className="content"></div>
     </div>
   );
 }
