@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "scp -P 26685 -r build root@95.169.7.111:/home/bylh/perceive"
+    "deploy": "scp -r build root@34.84.129.188:/home/bylicx/pro/perceive/build"
   },
   "eslintConfig": {
     "extends": "react-app"

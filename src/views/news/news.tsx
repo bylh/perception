@@ -1,17 +1,20 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import axios from '../../service/axios'
 import './news.scss'
 // antd
-import {Card, Tag} from 'antd'
+import {Card, Tag, List, Avatar, Spin} from 'antd'
 
-const {Meta} = Card;
+// const {Meta} = Card;
 const gridStyle = {
-    margin: '5px'
-    // textAlign: 'center',
+    margin: '5px',
+    // width: '100px',
+    // textAlign: 'center' as const,
 };
 interface News {
     title: string,
-    url: string
+    url: string,
+    desc?: string,
+    cover_image_url?: string
 }
 
 interface NewsTag {
@@ -33,49 +36,77 @@ function NewsTag(props: NewsTagProps) {
 export default function () {
     const [newsTags, setNewsTags] = useState<Array<NewsTag>>([])
     const [news, setNews] = useState<Array<News>>([])
+    const [loading, setLoading] = useState<boolean>(false)
     useEffect(() => {
         const fetchData = async () => {
-            const data = await axios.request({
-                method: 'get',
-                url: 'https://bylh.top:8000/newsTags'
-            })
-            setNewsTags(data.data.data)
+            try {
+                const data = await axios.request({
+                    method: 'get',
+                    url: '/newsTags'
+                })
+                setNewsTags(data.data.data)
+                fetchNews(data.data.data.find(item => item.name === 'V2EX'))
+            } finally {
+            }
         }
         fetchData()
     }, [])
 
-    async function fetNews(item) {
-        console.log(this);
-        let data = await axios.request({
-            method: 'get',
-            url: 'https://bylh.top:8000/news',
-            params: {
-                tag: item.name
-            }
-        });
-        console.log(data);
-        setNews(data.data.data)
+    async function fetchNews(item) {
+        if (!item) {
+            return;
+        }
+        try {
+            setLoading(true)
+            let data = await axios.request({
+                method: 'get',
+                url: '/news',
+                params: {
+                    tag: item.name
+                }
+            });
+            console.log(data);
+            setNews(data.data.data)
+        } finally {
+            setLoading(false)
+        }
     }
 
     // onClick不能直接绑定到自定义事件上面，要绑定到真实的dom
-    // const tags = newsTags.map((item, index) => <span key={index} onClick={() => fetNews(item)}><NewsTag tag={item}/></span>)
+    // const tags = newsTags.map((item, index) => <span key={index} onClick={() => fetchNews(item)}><NewsTag tag={item}/></span>)
     const tags =  <Card title="Daily News">{newsTags.map((item, index) =>
-        <Tag onClick={() => fetNews(item)} key={index} color="volcano" style={gridStyle}>{item.name}</Tag>
+        <Tag onClick={() => fetchNews(item)} key={index} color="volcano" style={gridStyle}>{item.name}</Tag>
     )}</Card>
-    // {/*<NewsTag onClick={() => fetNews(item)} key={index} tag={item}/>*/}
-    const newsArr = news.map((item, index) =>
-        <Card
-            style={{margin: '10px'}}
-            title={item.title}
-            extra={<a href={item.url} target="_blank">More</a>}
-            // cover={<img alt="example" src={item.url} />}
-            key={index * 100}>
-            <a href={item.url} target="_blank">{item.title}</a>
-            {/*<Meta title={item.title} description={item.title} />*/}
-        </Card>
-    )
-    return <div>{tags}
-        <div>{newsArr}</div>
+    // {/*<NewsTag onClick={() => fetchNews(item)} key={index} tag={item}/>*/}
+    const newsList = (<List
+        itemLayout="horizontal"
+        dataSource={news}
+        renderItem={item => (
+            <List.Item style={{margin: '10px'}}>
+                <List.Item.Meta
+                    avatar={<Avatar style={{display: item.cover_image_url ? 'inline-block' : 'none'}} src={item.cover_image_url} />}
+                    title={<a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>}
+                    description={item.desc}
+                />
+            </List.Item>
+        )}
+    />)
+    // const newsArr = news.map((item, index) =>
+    //     <Card
+    //         style={{margin: '10px'}}
+    //         title={item.title}
+    //         // extra={<a href={item.url} target="_blank" rel="noopener noreferrer" >More</a>}
+    //         // cover={<img alt="example" src={item.url} />}
+    //         key={index * 100}>
+    //         <a href={item.url} target="_blank" rel="noopener noreferrer" >{item.title}</a>
+    //         {/*<Meta title={item.title} description={item.title} />*/}
+    //     </Card>
+    // )
+    return <div>
+        {tags}
+        <Spin size="large" spinning={loading}>
+            <div>{newsList}</div>
+        </Spin>
     </div>
 
 }

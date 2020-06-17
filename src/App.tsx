@@ -1,26 +1,28 @@
 import React, {Component} from 'react'
 import './App.scss'
 import {Layout} from 'antd'
-import Home from './views/home/home'
-import HookGame from './views/hook-game/hook-game';
-import DraggableList from './views/draggable-list/draggable-list';
+// import Home from './views/home/home'
+// import HookGame from './views/hook-game/hook-game';
+// import DraggableList from './views/draggable-list/draggable-list';
 import News from './views/news/news';
 
 interface AppState {
     tabName: String,
 }
 
-const {Header, Content, Footer, Sider} = Layout
-const list = [{
-    src: 'https://images.unsplash.com/photo-1590355271375-2a33fa90634a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjk2MjE2fQ',
-    title: 'mac'
-}, {
-    src: 'https://images.unsplash.com/photo-1591087307816-b9fa08b5473c?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjk2MjE2fQ',
-    title: 'win'
-}, {
-    src: 'https://images.unsplash.com/photo-1590057984466-44fd56a0d3b1?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjk2MjE2fQ',
-    title: 'linux'
-}]
+// const {Header, Content, Footer, Sider} = Layout
+const {Content} = Layout
+
+// const list = [{
+//     src: 'https://images.unsplash.com/photo-1590355271375-2a33fa90634a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjk2MjE2fQ',
+//     title: 'mac'
+// }, {
+//     src: 'https://images.unsplash.com/photo-1591087307816-b9fa08b5473c?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjk2MjE2fQ',
+//     title: 'win'
+// }, {
+//     src: 'https://images.unsplash.com/photo-1590057984466-44fd56a0d3b1?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjk2MjE2fQ',
+//     title: 'linux'
+// }]
 
 class App extends Component<{}, AppState> {
     constructor(props) {
