@@ -1,15 +1,12 @@
 import React, {useState, useEffect} from 'react'
+import { DownOutlined } from '@ant-design/icons';
 import axios from '../../service/axios'
 import './news.scss'
 // antd
-import {Card, Tag, List, Avatar, Spin} from 'antd'
+import {List, Avatar, Spin, Tabs, Radio, BackTop, Tag, Card} from 'antd'
+export declare type TabPosition = 'left' | 'right' | 'top' | 'bottom';
+const { TabPane } = Tabs;
 
-// const {Meta} = Card;
-const gridStyle = {
-    margin: '5px',
-    // width: '100px',
-    // textAlign: 'center' as const,
-};
 
 interface News {
     title: string,
@@ -40,6 +37,9 @@ function NewsTag(props: NewsTagProps) {
 export default function () {
     const [newsTags, setNewsTags] = useState<Array<NewsTag>>([])
     const [news, setNews] = useState<Array<News>>([])
+    const [mode, setMode] = useState<TabPosition>('top')
+    const [activeKey, setActiveKey] = useState<string>('0')
+    const [fold, setFold] = useState<Boolean>(true)
     const [loading, setLoading] = useState<boolean>(false)
     useEffect(() => {
         const fetchData = async () => {
@@ -75,13 +75,23 @@ export default function () {
             setLoading(false)
         }
     }
-
+    const handleModeChange = e => {
+        setMode(e.target.value)
+    };
+    const handleTabChange = key => {
+        setActiveKey(key)
+        fetchNews(newsTags[key])
+    };
+    const changeFold = () => {
+        setFold(!fold)
+    }
     // onClick不能直接绑定到自定义事件上面，要绑定到真实的dom
     // const tags = newsTags.map((item, index) => <span key={index} onClick={() => fetchNews(item)}><NewsTag tag={item}/></span>)
     const tags =  <Card title="Daily News">{newsTags.map((item, index) =>
-        <Tag onClick={() => fetchNews(item)} key={index} color="volcano" style={gridStyle}>{item.name}</Tag>
+        <Tag style={{margin: '5px'}} onClick={() => handleTabChange(index)} key={index} color="volcano">{item.name}</Tag>
     )}</Card>
     // {/*<NewsTag onClick={() => fetchNews(item)} key={index} tag={item}/>*/}
+
     const newsList = (<List
         itemLayout="horizontal"
         dataSource={news}
@@ -106,6 +116,25 @@ export default function () {
             </List.Item>
         )}
     />)
+    const tabs = <div>
+        <Radio.Group onChange={handleModeChange} value={mode} style={{ marginBottom: 8 , display: 'none'}}>
+            <Radio.Button value="top">Horizontal</Radio.Button>
+            <Radio.Button value="left">Vertical</Radio.Button>
+        </Radio.Group>
+        <Tabs activeKey={activeKey}
+              tabPosition={mode}
+              tabBarExtraContent={<DownOutlined style={{display: "none"}} onClick={changeFold}/>}
+              onChange={handleTabChange}>
+            {newsTags.map((item, i) => (
+                <TabPane key={i} tab={item.name}>
+                    <div>
+                        {!fold && tags}
+                    </div>
+                    {newsList}
+                </TabPane>
+            ))}
+        </Tabs>
+    </div>
     // const newsArr = news.map((item, index) =>
     //     <Card
     //         style={{margin: '10px'}}
@@ -117,11 +146,9 @@ export default function () {
     //         {/*<Meta title={item.title} description={item.title} />*/}
     //     </Card>
     // )
-    return <div>
-        {tags}
-        <Spin size="large" spinning={loading}>
-            <div>{newsList}</div>
-        </Spin>
-    </div>
+    return <Spin size="large" spinning={loading}>
+        <div style={{margin: '10px'}}>{tabs}</div>
+        <BackTop />
+    </Spin>
 
 }

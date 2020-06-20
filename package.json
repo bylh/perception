@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.2.1",
     "@types/antd": "^1.0.0",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.12",
@@ -11,13 +12,13 @@
     "@types/three": "^0.103.2",
     "antd": "^4.3.4",
     "axios": "^0.19.0",
+    "dayjs": "^1.8.18",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
     "three": "^0.109.0",
-    "typescript": "3.6.3",
-    "dayjs": "^1.8.18"
+    "typescript": "3.6.3"
   },
   "scripts": {
     "start": "react-scripts start",
