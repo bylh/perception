@@ -10,11 +10,15 @@ const gridStyle = {
     // width: '100px',
     // textAlign: 'center' as const,
 };
+
 interface News {
     title: string,
     url: string,
     desc?: string,
-    cover_image_url?: string
+    cover_img_url?: string,
+    avatar_img_url?: string,
+    comment_count?: number,
+    view_count?: number
 }
 
 interface NewsTag {
@@ -82,9 +86,20 @@ export default function () {
         itemLayout="horizontal"
         dataSource={news}
         renderItem={item => (
-            <List.Item style={{margin: '10px'}}>
+            <List.Item
+                style={{margin: '10px'}}
+                extra={
+                    <img
+                        width={120}
+                        height={90}
+                        alt="logo"
+                        style={{display: item.cover_img_url ? 'inline-block' : 'none'}}
+                        src={item.cover_img_url}
+                    />
+                }
+            >
                 <List.Item.Meta
-                    avatar={<Avatar style={{display: item.cover_image_url ? 'inline-block' : 'none'}} src={item.cover_image_url} />}
+                    avatar={<Avatar style={{display: item.avatar_img_url ? 'inline-block' : 'none'}} src={item.avatar_img_url} />}
                     title={<a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>}
                     description={item.desc}
                 />
