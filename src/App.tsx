@@ -1,15 +1,15 @@
 import React, {createContext, useEffect, useState} from 'react'
 import './App.scss'
-import {Layout} from 'antd'
+import {Layout, Drawer, Button} from 'antd'
 // import Home from './views/home/home'
 // import HookGame from './views/hook-game/hook-game';
 // import DraggableList from './views/draggable-list/draggable-list';
 import News from './views/news/news';
 import Login from './views/login/login'
+import Account from './views/account/account'
 
 
-// const {Header, Content, Footer, Sider} = Layout
-let {Content} = Layout
+const {Header, Content} = Layout
 
 // const list = [{
 //     src: 'https://images.unsplash.com/photo-1590355271375-2a33fa90634a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjk2MjE2fQ',
@@ -26,7 +26,7 @@ const AuthContext = createContext(null);
 function App() {
     const [isLogin, setIsLogin] = useState<boolean>(false)
     // const [sessionId, setSessionId] = useState<String>()
-    // const [tabName, setTabName] = useState<String>('chess')
+    const [tabName, setTabName] = useState<String>('news')
 
     useEffect(() => {
         let token = localStorage.getItem('token')
@@ -35,28 +35,65 @@ function App() {
             // setSessionId(token)
         }
     }, [])
-
-    // changeTab(name: String) {
-    //     this.setState({
-    //         tabName: this.state.tabName === 'hook-game' ? 'chess' : 'hook-game'
-    //     });
-    //     console.log(this.state.tabName);
-    // }
+    const [visible, setVisible] = useState(false);
+    const showDrawer = () => {
+        setVisible(true);
+    };
+    const onClose = () => {
+        setVisible(false);
+    };
+    const changeTab = (name) => {
+        setTabName(name)
+        setVisible(false)
+    }
+    const logout = () => {
+        localStorage.removeItem('token')
+        window.location.reload()
+    }
      return (
         <div className="App">
+            <Drawer
+                title="功能"
+                placement="top"
+                closable={false}
+                onClose={onClose}
+                visible={visible}
+            >
+                <Button type="text" onClick={() => changeTab('news')} block>
+                    News
+                </Button>
+                <Button type="text" onClick={() => changeTab('account')} block>
+                    Account
+                </Button>
+                <Button type="text" onClick={() => changeTab('tickers')} block>
+                    Tickers
+                </Button>
+                <Button type="text" onClick={() => logout()} block>
+                    logout
+                </Button>
+            </Drawer>
+
             <Layout className="container">
-                {/*<Header className="header">*/}
-                {/*  <span onClick={() => this.changeTab('hook-game')}>perceive</span>*/}
-                {/*  </Header>*/}
+                <Header className="header">
+                    <Button type="text" onClick={showDrawer}>
+                        News
+                    </Button>
+                  </Header>
                 <Layout className="content">
                     {/*<Sider className="sider">导航</Sider>*/}
                     <Content className="main">
-                        {isLogin &&  <News/>}
+                        {isLogin &&
+                            <>
+                            {tabName === "news" && <News/>}
+                            {tabName === 'account' && <Account/>}
+                            </>
+                        }
                         {!isLogin &&
-                        <AuthContext.Provider value={setIsLogin}>
-                            <Login/>
-                        </AuthContext.Provider>
-
+                            <div>
+                                <AuthContext.Provider value={setIsLogin}>
+                                    <Login/>
+                                </AuthContext.Provider>
+                            </div>
                         }
                         {/*<DraggableList list={list}/>*/}
                         {/*{*/}

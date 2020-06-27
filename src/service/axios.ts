@@ -3,8 +3,8 @@ import axios from 'axios'
 let env = process.env.NODE_ENV
 let baseUrl;
 if (env === 'development') {
-    // baseUrl = 'http://local.perceive.top:8001'
-    baseUrl = 'https://bylh.top:8000'
+    baseUrl = 'http://local.perceive.top:8001'
+    // baseUrl = 'https://bylh.top:8000'
 } else if (env === 'production') {
     baseUrl = 'https://bylh.top:8000'
 }
