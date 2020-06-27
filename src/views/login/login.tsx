@@ -20,7 +20,7 @@ export default function () {
         data.append('password',values.password);
         const res = await axios.request({
             method: "post",
-            url: '/auth',
+            url: '/login',
             data
         })
         if (res.data.code !== 200) {
