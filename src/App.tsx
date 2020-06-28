@@ -7,6 +7,7 @@ import {Layout, Drawer, Button} from 'antd'
 import News from './views/news/news';
 import Login from './views/login/login'
 import Account from './views/account/account'
+import Demo from './views/demo/demo';
 
 
 const {Header, Content} = Layout
@@ -23,6 +24,7 @@ const {Header, Content} = Layout
 // }]
 
 const AuthContext = createContext(null);
+
 function App() {
     const [isLogin, setIsLogin] = useState<boolean>(false)
     // const [sessionId, setSessionId] = useState<String>()
@@ -50,7 +52,7 @@ function App() {
         localStorage.removeItem('token')
         window.location.reload()
     }
-     return (
+    return (
         <div className="App">
             <Drawer
                 title="功能"
@@ -68,9 +70,13 @@ function App() {
                 <Button type="text" onClick={() => changeTab('tickers')} block>
                     Tickers
                 </Button>
+                <Button type="text" onClick={() => changeTab('demo')} block>
+                    Demo
+                </Button>
                 <Button type="text" onClick={() => logout()} block>
                     logout
                 </Button>
+
             </Drawer>
 
             <Layout className="container">
@@ -78,22 +84,23 @@ function App() {
                     <Button type="text" onClick={showDrawer}>
                         News
                     </Button>
-                  </Header>
+                </Header>
                 <Layout className="content">
                     {/*<Sider className="sider">导航</Sider>*/}
                     <Content className="main">
                         {isLogin &&
-                            <>
+                        <>
                             {tabName === "news" && <News/>}
                             {tabName === 'account' && <Account/>}
-                            </>
+                            {tabName === 'demo' && <Demo/>}
+                        </>
                         }
                         {!isLogin &&
-                            <div>
-                                <AuthContext.Provider value={setIsLogin}>
-                                    <Login/>
-                                </AuthContext.Provider>
-                            </div>
+                        <div>
+                            <AuthContext.Provider value={setIsLogin}>
+                                <Login/>
+                            </AuthContext.Provider>
+                        </div>
                         }
                         {/*<DraggableList list={list}/>*/}
                         {/*{*/}
@@ -109,6 +116,7 @@ function App() {
         </div>
     )
 }
+
 export {
     AuthContext
 }
