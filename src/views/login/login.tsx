@@ -1,7 +1,9 @@
 import { Form, Input, Button, Checkbox } from 'antd';
-import React, {useContext} from 'react'
+import React from 'react'
+import {
+    useHistory,
+} from "react-router-dom"
 import axios from '../../service/axios'
-import {AuthContext} from '../../App'
 import './login.scss'
 const layout = {
     labelCol: { span: 8 },
@@ -12,7 +14,7 @@ const tailLayout = {
 };
 
 export default function () {
-    const setIsLogin = useContext(AuthContext);
+    const history = useHistory()
     const onFinish = async (values) => {
         console.log('Success:', values);
         let data = new FormData();
@@ -24,12 +26,11 @@ export default function () {
             data
         })
         if (res.data.code !== 200) {
-            setIsLogin(false);
             return;
         }
         console.log(res.data.data.token)
         localStorage.setItem("token", res.data.data.token)
-        setIsLogin(true);
+        history.push('/')
     };
 
     const onFinishFailed = errorInfo => {
