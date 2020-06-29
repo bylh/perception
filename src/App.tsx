@@ -53,32 +53,34 @@ function Container() {
             visible={visible}
         >
             <nav>
-                <ul>
-                    <li>
-                        <Button type="dashed" block onClick={() => changeTab({name: 'news', path: '/'})}>News</Button>
-                        {/*<Link to="/">News</Link>*/}
-                    </li>
-                    <li>
-                        <Button type="dashed" block
-                                onClick={() => changeTab({name: 'account', path: '/account'})}>Account</Button>
-                        {/*<Link to="/account">Account</Link>*/}
-                    </li>
-                    <li>
-                        <Button type="dashed" block
-                                onClick={() => changeTab({name: 'demo', path: '/demo'})}>Demo</Button>
-                        {/*<Link to="/demo">Demo</Link>*/}
-                    </li>
-                    <li>
-                        <Button type="dashed" block
-                                onClick={() => changeTab({name: 'login', path: '/login'})}>Login</Button>
-                        {/*<Link to="/login">Login</Link>*/}
-                    </li>
-                    <li>
-                        <Button type="text" onClick={() => logout()} block>
-                            logout
-                        </Button>
-                    </li>
-                </ul>
+                <Button block type="primary"
+                        onClick={() => changeTab({name: 'news', path: '/'})}>News</Button>
+                <Button block type="primary"
+                        onClick={() => changeTab({name: 'account', path: '/account'})}>Account</Button>
+                <Button block type="primary"
+                        onClick={() => changeTab({name: 'demo', path: '/demo'})}>Demo</Button>
+                <Button block type="primary"
+                        onClick={() => changeTab({name: 'login', path: '/login'})}>Login</Button>
+                <Button type="primary" onClick={() => logout()} block>
+                    logout
+                </Button>
+                {/*<ul>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/">News</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/account">Account</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+
+                {/*        <Link to="/demo">Demo</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/login">Login</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*    </li>*/}
+                {/*</ul>*/}
             </nav>
             {/*<Button type="text" onClick={() => changeTab('news')} block>*/}
             {/*    News*/}
