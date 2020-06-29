@@ -13,7 +13,7 @@ import Login from './views/login/login'
 import Account from './views/account/account'
 import Demo from './views/demo/demo';
 import MySearch from './views/search/search'
-// import MyCarousel from './views/carousel/carousel'
+import MyCarousel from './views/carousel/carousel'
 
 const {Header, Content} = Layout
 const { Search } = Input
@@ -91,7 +91,7 @@ function Container() {
                 <Content className="main">
                     <div>
                         <MySearch/>
-                        {/*<MyCarousel/>*/}
+                        <MyCarousel/>
                         <Switch>
                             <Route path="/login">
                                 <Login/>
