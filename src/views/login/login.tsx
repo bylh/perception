@@ -31,6 +31,7 @@ export default function () {
         console.log(res.data.data.token)
         localStorage.setItem("token", res.data.data.token)
         history.push('/')
+        window.location.reload()
     };
 
     const onFinishFailed = errorInfo => {
