@@ -4,25 +4,32 @@ import {
     Switch,
     Route,
     useHistory,
-    // withRouter
 } from "react-router-dom"
 import './App.scss'
-import {Layout, Drawer, Button} from 'antd'
+import {Layout, Drawer, Button, Input} from 'antd'
+import { AudioOutlined } from '@ant-design/icons'
 import News from './views/news/news';
 import Login from './views/login/login'
 import Account from './views/account/account'
 import Demo from './views/demo/demo';
+import MySearch from './views/search/search'
+// import MyCarousel from './views/carousel/carousel'
 
 const {Header, Content} = Layout
+const { Search } = Input
+const suffix = (
+    <AudioOutlined
+        style={{
+            fontSize: 16,
+            color: '#1890ff',
+        }}
+    />
+)
 
 function Container() {
-    console.log('初始化组件');
     const [visible, setVisible] = useState(false)
-
     const history = useHistory()
-
     useEffect(() => {
-        console.log('useEffect执行')
         let token = localStorage.getItem('token')
         if (token) {
         } else {
@@ -64,37 +71,7 @@ function Container() {
                 <Button type="primary" onClick={() => logout()} block>
                     logout
                 </Button>
-                {/*<ul>*/}
-                {/*    <li>*/}
-                {/*        <Link to="/">News</Link>*/}
-                {/*    </li>*/}
-                {/*    <li>*/}
-                {/*        <Link to="/account">Account</Link>*/}
-                {/*    </li>*/}
-                {/*    <li>*/}
-
-                {/*        <Link to="/demo">Demo</Link>*/}
-                {/*    </li>*/}
-                {/*    <li>*/}
-                {/*        <Link to="/login">Login</Link>*/}
-                {/*    </li>*/}
-                {/*    <li>*/}
-                {/*    </li>*/}
-                {/*</ul>*/}
             </nav>
-            {/*<Button type="text" onClick={() => changeTab('news')} block>*/}
-            {/*    News*/}
-            {/*</Button>*/}
-            {/*<Button type="text" onClick={() => changeTab('account')} block>*/}
-            {/*    Account*/}
-            {/*</Button>*/}
-            {/*<Button type="text" onClick={() => changeTab('tickers')} block>*/}
-            {/*    Tickers*/}
-            {/*</Button>*/}
-            {/*<Button type="text" onClick={() => changeTab('demo')} block>*/}
-            {/*    Demo*/}
-            {/*</Button>*/}
-
         </Drawer>
 
         <Layout className="container">
@@ -102,11 +79,19 @@ function Container() {
                 <Button type="text" onClick={() => showDrawer()}>
                     News
                 </Button>
+                <Search
+                    placeholder="input search text"
+                    onSearch={value => console.log(value)}
+                    loading={false}
+                    suffix={suffix}
+                    style={{ width: '70%', marginLeft: '10px', maxWidth: '400px'}}
+                />
             </Header>
             <Layout className="content">
-                {/*<Sider className="sider">导航</Sider>*/}
                 <Content className="main">
                     <div>
+                        <MySearch/>
+                        {/*<MyCarousel/>*/}
                         <Switch>
                             <Route path="/login">
                                 <Login/>
@@ -124,7 +109,6 @@ function Container() {
                     </div>
                 </Content>
             </Layout>
-            {/*<Footer className="footer">关于：测试阶段</Footer>*/}
         </Layout>
     </div>
 }
