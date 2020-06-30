@@ -3,7 +3,7 @@ import {Table, Space, Divider} from 'antd';
 // import ReactJson from 'react-json-view'
 import axios from '../../../service/axios'
 import './tickers.scss'
-import {DoubleRightOutlined, ArrowUpOutlined} from '@ant-design/icons';
+import {ArrowUpOutlined} from '@ant-design/icons';
 
 interface Account {
     exName: string,
