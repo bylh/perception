@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {Table, Tag, Space} from 'antd';
+import {Table, Tag, Space, Divider} from 'antd';
 // import ReactJson from 'react-json-view'
 import axios from '../../service/axios'
 import './account.scss'
-import { DoubleRightOutlined } from '@ant-design/icons';
+import { DoubleRightOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import Tickers from './tickers/tickers'
 
 interface Account {
     exName: string,
@@ -140,6 +141,10 @@ export default function () {
         <Table
             rowKey={record => record.OrderID}
             columns={tableProps}
+            pagination={{
+                hideOnSinglePage: true,
+                pageSize: 50,
+            }}
             expandable={{
                 defaultExpandAllRows: false,
                 expandRowByClick: true,
@@ -149,8 +154,11 @@ export default function () {
             dataSource={tableData}/>
     return (
         <div className="account">
-            <h3>{'BINANCE'}</h3>
+            <div id="openorder">
+                <Divider plain dashed>{'挂单'}<a href="#tickers"><ArrowDownOutlined /></a></Divider>
+            </div>
             {openOrders}
+            <Tickers/>
         </div>
     );
 };
