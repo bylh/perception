@@ -1,5 +1,15 @@
-.news-tag {
-  display: inline-block;
-  margin: 5px;
-  background: azure;
+.news {
+  .news-tag {
+    display: inline-block;
+    margin: 5px;
+    background: azure;
+  }
+
+  .tab-content {
+    top: 0;
+  }
+  .striky-box {
+    position: -webkit-sticky;
+    position: sticky;
+  }
 }

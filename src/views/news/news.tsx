@@ -75,6 +75,7 @@ export default function () {
             setLoading(false)
         }
     }
+
     const handleModeChange = e => {
         setMode(e.target.value)
     };
@@ -87,50 +88,57 @@ export default function () {
     }
     // onClick不能直接绑定到自定义事件上面，要绑定到真实的dom
     // const tags = newsTags.map((item, index) => <span key={index} onClick={() => fetchNews(item)}><NewsTag tag={item}/></span>)
-    const tags =  <Card title="Daily News">{newsTags.map((item, index) =>
-        <Tag style={{margin: '5px'}} onClick={() => handleTabChange(index)} key={index} color="volcano">{item.name}</Tag>
+    const tags = <Card title="Daily News">{newsTags.map((item, index) =>
+        <Tag style={{margin: '5px'}} onClick={() => handleTabChange(index)} key={index}
+             color="volcano">{item.name}</Tag>
     )}</Card>
     // {/*<NewsTag onClick={() => fetchNews(item)} key={index} tag={item}/>*/}
 
-    const newsList = (<List
-        itemLayout="horizontal"
-        dataSource={news}
-        renderItem={item => (
-            <List.Item
-                style={{margin: '10px'}}
-                extra={
-                    <img
-                        width={120}
-                        height={90}
-                        alt="logo"
-                        style={{display: item.cover_img_url ? 'inline-block' : 'none'}}
-                        src={item.cover_img_url}
+    const newsList = (
+        <List
+            itemLayout="horizontal"
+            dataSource={news}
+            renderItem={item => (
+                <List.Item
+                    style={{margin: '10px'}}
+                    extra={
+                        <img
+                            width={120}
+                            height={90}
+                            alt="logo"
+                            style={{display: item.cover_img_url ? 'inline-block' : 'none'}}
+                            src={item.cover_img_url}
+                        />
+                    }
+                >
+                    <List.Item.Meta
+                        avatar={<Avatar style={{display: item.avatar_img_url ? 'inline-block' : 'none'}}
+                                        src={item.avatar_img_url}/>}
+                        title={<a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>}
+                        description={item.desc}
                     />
-                }
-            >
-                <List.Item.Meta
-                    avatar={<Avatar style={{display: item.avatar_img_url ? 'inline-block' : 'none'}} src={item.avatar_img_url} />}
-                    title={<a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>}
-                    description={item.desc}
-                />
-            </List.Item>
-        )}
-    />)
+                </List.Item>
+            )}
+        />)
     const tabs = <div>
-        <Radio.Group onChange={handleModeChange} value={mode} style={{ marginBottom: 8 , display: 'none'}}>
-            <Radio.Button value="top">Horizontal</Radio.Button>
-            <Radio.Button value="left">Vertical</Radio.Button>
-        </Radio.Group>
+        {/*<Radio.Group onChange={handleModeChange} value={mode} style={{marginBottom: 8, display: 'none'}}>*/}
+        {/*    <Radio.Button value="top">Horizontal</Radio.Button>*/}
+        {/*    <Radio.Button value="left">Vertical</Radio.Button>*/}
+        {/*</Radio.Group>*/}
         <Tabs activeKey={activeKey}
+              tabBarStyle={{position: 'sticky', top: 0}}
               tabPosition={mode}
               tabBarExtraContent={<DownOutlined style={{display: "none"}} onClick={changeFold}/>}
               onChange={handleTabChange}>
             {newsTags.map((item, i) => (
                 <TabPane key={i} tab={item.name}>
-                    <div>
-                        {!fold && tags}
+                    <div className='tab-content striky-box'>
+                        {/*<div>*/}
+                        {/*    {!fold && tags}*/}
+                        {/*</div>*/}
+                        {newsList} 
                     </div>
-                    {newsList}
+                    
                 </TabPane>
             ))}
         </Tabs>
@@ -147,8 +155,8 @@ export default function () {
     //     </Card>
     // )
     return <Spin size="large" spinning={loading}>
-        <div style={{margin: '10px'}}>{tabs}</div>
-        <BackTop />
+        <div className="news" style={{margin: '10px'}}>{tabs}</div>
+        <BackTop/>
     </Spin>
 
 }
