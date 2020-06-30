@@ -1,33 +1,3 @@
-@import '~antd/dist/antd.css';
 .App {
-  height: 100vh;
-  .container {
-    height: 100%;
-    .header {
-      color: white;
-      background: #cccccc;
-      //text-align: center;
-    }
-    .content {
-      .sider {
-        //background: gray;
-      }
-      .main {
-        background: white;
-      }
-    }
-    .footer {
-      background: bisque;
-      text-align: center;
-    }
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  
 }

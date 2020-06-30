@@ -1,0 +1,24 @@
+@import '~antd/dist/antd.css';
+.main {
+  height: 100vh;
+  .container {
+    height: 100%;
+    .header {
+      color: white;
+      background: #cccccc;
+      //text-align: center;
+    }
+    .content {
+      .sider {
+        //background: gray;
+      }
+      .main {
+        background: white;
+      }
+    }
+    .footer {
+      background: bisque;
+      text-align: center;
+    }
+  }
+}
