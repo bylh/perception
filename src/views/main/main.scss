@@ -1,19 +1,29 @@
 @import '~antd/dist/antd.css';
 .main {
   height: 100vh;
+  .striky-box {
+    position: -webkit-sticky;
+    position: sticky;
+  }
   .container {
     height: 100%;
     .header {
       color: white;
       background: #cccccc;
-      //text-align: center;
+      top: 0
     }
     .content {
-      .sider {
-        //background: gray;
-      }
+      top: 0;
       .main {
         background: white;
+        .sub-header {
+          top: 0;
+        }
+        .router-page {
+          top: 0;
+          z-index: 100;
+          background: white;
+        }
       }
     }
     .footer {

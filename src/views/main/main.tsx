@@ -7,7 +7,7 @@ import {
 } from "react-router-dom"
 import './main.scss'
 import {Layout, Drawer, Button, Input} from 'antd'
-import { AudioOutlined } from '@ant-design/icons'
+import {AudioOutlined} from '@ant-design/icons'
 import News from '../news/news';
 import Login from '../login/login'
 import Account from '../account/account'
@@ -16,7 +16,7 @@ import MySearch from '../search/search'
 import MyCarousel from '../carousel/carousel'
 
 const {Header, Content} = Layout
-const { Search } = Input
+const {Search} = Input
 const suffix = (
     <AudioOutlined
         style={{
@@ -75,7 +75,7 @@ function Container() {
         </Drawer>
 
         <Layout className="container">
-            <Header className="header">
+            <Header className="header striky-box">
                 <Button type="text" onClick={() => showDrawer()}>
                     News
                 </Button>
@@ -84,28 +84,36 @@ function Container() {
                     onSearch={value => console.log(value)}
                     loading={false}
                     suffix={suffix}
-                    style={{ width: '70%', marginLeft: '10px', maxWidth: '400px'}}
+                    style={{width: '70%', marginLeft: '10px', maxWidth: '400px'}}
                 />
             </Header>
-            <Layout className="content">
+            <Layout className="content striky-box">
                 <Content className="main">
                     <div>
-                        <MySearch/>
-                        <MyCarousel/>
-                        <Switch>
-                            <Route path="/login">
-                                <Login/>
-                            </Route>
-                            <Route path="/account">
-                                <Account/>
-                            </Route>
-                            <Route path="/demo">
-                                <Demo/>
-                            </Route>
-                            <Route path="/">
-                                <News/>
-                            </Route>
-                        </Switch>
+                        <div className="sub-header striky-box">
+                            <MySearch/>
+                            <MyCarousel/>
+                        </div>
+                        <div className="router-page striky-box">
+                            <Switch>
+                                <Route path="/login">
+                                    <Login/>
+                                </Route>
+                                <Route path="/account">
+                                    <Account/>
+                                </Route>
+                                <Route path="/demo">
+                                    <Demo/>
+                                </Route>
+                                <Route path="/">
+                                    <div>
+                                        <div>
+                                            <News/>
+                                        </div>
+                                    </div>
+                                </Route>
+                            </Switch>
+                        </div>
                     </div>
                 </Content>
             </Layout>
