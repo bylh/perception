@@ -1,9 +1,10 @@
-
 import React, {useState, useEffect} from 'react'
-import { Table, Tag, Space } from 'antd';
+import {Table, Tag, Space} from 'antd';
 // import ReactJson from 'react-json-view'
 import axios from '../../service/axios'
 import './account.scss'
+import { DoubleRightOutlined } from '@ant-design/icons';
+
 interface Account {
     exName: string,
     openOrders: []
@@ -14,16 +15,11 @@ const tableProps = [
         title: '日期',
         dataIndex: 'OrderTime',
         key: 'OrderTime',
-        // width: 50,
         ellipsis: true,
-        render: time => <div><div>{new Date(time).toLocaleDateString()}</div>{new Date(time).toLocaleTimeString()}</div>,
+        render: time => <div>
+            <div>{new Date(time).toLocaleDateString()}</div>
+            {new Date(time).toLocaleTimeString()}</div>,
     },
-    // {
-    //     title: '订单ID',
-    //     dataIndex: 'OrderID',
-    //     key: 'OrderID',
-    //     render: text => <a>{text}</a>,
-    // },
     {
         title: '挂单价',
         dataIndex: 'Price',
@@ -116,16 +112,41 @@ export default function () {
         fetchData()
     }, [])
     // const openOrders = bnAccount && <ReactJson src={bnAccount.openOrders}/>
-    let  tableData = [];
+    let tableData = [];
     if (bnAccount && Array.isArray(bnAccount.openOrders)) {
         tableData = bnAccount.openOrders
     }
     console.log('tableData', tableData)
-   
-    const openOrders = bnAccount && <Table rowKey={record => record.OrderID} columns={tableProps} dataSource={tableData} />
-    // bnAccount.openOrders.map((item, index) =>
-        // <div key={index}>{JSON.stringify(item)}</div>
-    // )
+
+    const expandRow = (recrod) => {
+        return <div>
+            <Space>
+                <span>{recrod.OrderID}</span>
+                <span>
+                    <Tag color="gold"><a href={recrod.Currency.CurrencyA.Desc}
+                                         target="_blank"
+                                         rel="noopener noreferrer">{recrod.Currency.CurrencyA.Symbol}</a></Tag>
+                    <DoubleRightOutlined />&nbsp;&nbsp;
+                    <Tag color="gold"><a href={recrod.Currency.CurrencyB.Desc}
+                                         target="_blank"
+                                         rel="noopener noreferrer">{recrod.Currency.CurrencyB.Symbol}</a></Tag>
+                </span>
+
+            </Space>
+        </div>
+    }
+
+    const openOrders = bnAccount &&
+        <Table
+            rowKey={record => record.OrderID}
+            columns={tableProps}
+            expandable={{
+                defaultExpandAllRows: false,
+                expandRowByClick: true,
+                expandedRowRender: record => expandRow(record),
+                rowExpandable: record => true,
+            }}
+            dataSource={tableData}/>
     return (
         <div className="account">
             <h3>{'BINANCE'}</h3>

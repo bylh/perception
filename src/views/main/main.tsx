@@ -7,7 +7,7 @@ import {
 } from "react-router-dom"
 import './main.scss'
 import {Layout, Drawer, Button, Input} from 'antd'
-import {AudioOutlined} from '@ant-design/icons'
+// import {AudioOutlined} from '@ant-design/icons'
 import News from '../news/news';
 import Login from '../login/login'
 import Account from '../account/account'
@@ -17,14 +17,14 @@ import MyCarousel from '../carousel/carousel'
 
 const {Header, Content} = Layout
 const {Search} = Input
-const suffix = (
-    <AudioOutlined
-        style={{
-            fontSize: 16,
-            color: '#1890ff',
-        }}
-    />
-)
+// const suffix = (
+//     <AudioOutlined
+//         style={{
+//             fontSize: 16,
+//             color: '#1890ff',
+//         }}
+//     />
+// )
 
 function Container() {
     const [visible, setVisible] = useState(false)
@@ -83,7 +83,7 @@ function Container() {
                     placeholder="input search text"
                     onSearch={value => console.log(value)}
                     loading={false}
-                    suffix={suffix}
+                    // suffix={suffix}
                     style={{width: '70%', marginLeft: '10px', maxWidth: '400px'}}
                 />
             </Header>

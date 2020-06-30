@@ -10,7 +10,10 @@
     .header {
       color: white;
       background: #cccccc;
-      top: 0
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .content {
       top: 0;

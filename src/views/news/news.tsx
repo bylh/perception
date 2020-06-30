@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import { DownOutlined } from '@ant-design/icons';
+import {DownOutlined} from '@ant-design/icons';
 import axios from '../../service/axios'
 import './news.scss'
 // antd
-import {List, Avatar, Spin, Tabs, Radio, BackTop, Tag, Card} from 'antd'
+import {List, Avatar, Spin, Tabs, BackTop, Radio, Tag, Card} from 'antd'
+
 export declare type TabPosition = 'left' | 'right' | 'top' | 'bottom';
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
 
 interface News {
@@ -121,10 +122,10 @@ export default function () {
             )}
         />)
     const tabs = <div>
-        {/*<Radio.Group onChange={handleModeChange} value={mode} style={{marginBottom: 8, display: 'none'}}>*/}
-        {/*    <Radio.Button value="top">Horizontal</Radio.Button>*/}
-        {/*    <Radio.Button value="left">Vertical</Radio.Button>*/}
-        {/*</Radio.Group>*/}
+        <Radio.Group onChange={handleModeChange} value={mode} style={{marginBottom: 8, display: 'none'}}>
+            <Radio.Button value="top">Horizontal</Radio.Button>
+            <Radio.Button value="left">Vertical</Radio.Button>
+        </Radio.Group>
         <Tabs activeKey={activeKey}
               tabBarStyle={{position: 'sticky', top: 0}}
               tabPosition={mode}
@@ -133,27 +134,16 @@ export default function () {
             {newsTags.map((item, i) => (
                 <TabPane key={i} tab={item.name}>
                     <div className='tab-content striky-box'>
-                        {/*<div>*/}
-                        {/*    {!fold && tags}*/}
-                        {/*</div>*/}
-                        {newsList} 
+                        <div>
+                            {!fold && tags}
+                        </div>
+                        {newsList}
                     </div>
-                    
+
                 </TabPane>
             ))}
         </Tabs>
     </div>
-    // const newsArr = news.map((item, index) =>
-    //     <Card
-    //         style={{margin: '10px'}}
-    //         title={item.title}
-    //         // extra={<a href={item.url} target="_blank" rel="noopener noreferrer" >More</a>}
-    //         // cover={<img alt="example" src={item.url} />}
-    //         key={index * 100}>
-    //         <a href={item.url} target="_blank" rel="noopener noreferrer" >{item.title}</a>
-    //         {/*<Meta title={item.title} description={item.title} />*/}
-    //     </Card>
-    // )
     return <Spin size="large" spinning={loading}>
         <div className="news" style={{margin: '10px'}}>{tabs}</div>
         <BackTop/>
